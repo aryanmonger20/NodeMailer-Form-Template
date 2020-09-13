@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <title>Forms Review</title>
+   
+  </head>
+
+  <style>
+         
+       
+            body {
+          background-color: rgb(57, 169, 219);
+          font-family: Rubik, Arial;
+        }
+        
+        form {
+          text-align: center;
+          line-height: 30px;
+          height: 80%;
+          overflow: auto;
+        }
+        
+        form hr {
+          width: 15%;
+        }
+        
+        h1 {
+          text-align: center;
+        }
+        
+        #burger {
+          max-height: 30%;
+        }
+        
+        #overlay {
+          width: 80%;
+          margin: 3% auto;
+          height: 95vh;
+          background-color: rgba(255, 255, 255, 0.9);
+          border-radius: 40px;
+        }
+        
+        #logo {
+          height: 100px;
+          display: block;
+          margin: auto;
+        }
+        
+        
+        .toppings label, .cheesy label {
+          margin-right: 25px;
+        }
+        
+           
+            </style>
+
+
+       
+          <body>
+              <form>
+            <section id="overlay">
+              <hr>
+              
+                        <h1 align="center">Create an Appointment</h1>
+                
+                  <label for="Name">Name</label>
+                    <input type="text" name="Name" id="subject" placeholder="Enter Your Name">
+                
+                <hr>
+                
+                <section class="Mobile">
+                  <label for="Mobile">Mobile No.</label>
+                  <input type="number" name="Mobile" id="Mobile">
+                </section>
+                <hr>
+                
+                <section class="Mobile">
+                    <label for="email">Email.</label>
+                    <input type="email" name="email" id="email">
+                  </section>
+                  <hr>
+
+                <section class="Urgency">
+                  <label for="Urgency">How urgently you need Appointment</label>
+                  <br>
+                  <span>Not Urgent</span>
+                  <input type="range" name="Urgency" id="Urgency" value="3" min="1" max="5">
+                  <span>Very Urgent</span>
+                </section>
+                <hr>
+               
+               
+                <section class="doc">
+                  <label for="doc">Type of doctor?</label>
+                  <select name="doc" id="doc">
+                    <option value="Physiotherapist">Physiotherapist</option>
+                    <option value="Neurologist">Neurologist</option>
+                    <option value="ENT">ENT</option>
+                    <option value ="Physian">Physian</option>
+                  </select>
+                </section>
+                <hr>
+                
+                
+                
+                <section class="extra-info">
+                  <label for="extra">Anything else you want to add?</label>
+                  <br>
+                  <textarea id="text" name="extra" rows="3" cols="40"></textarea>
+                </section>
+                <hr>
+        
+                <section class="submission">
+                  <input type="submit" value="Submit"/>
+                </section>
+     
+            </section>
+          
+        </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+      $("form").on("submit", e => {
+        e.preventDefault();
+
+        const email = $("#email")
+          .val()
+          .trim();
+         
+          const mobile= $("#Mobile")
+          .val()
+          .trim();
+        const subject = $("#subject")
+          .val()
+          .trim();
+        const text = $("#text")
+          .val()
+          .trim();
+
+        const data = {
+          email,
+          subject,
+          mobile,
+          text
+        };
+
+        $.post("/email", data)
+          .then(() => {
+            window.location.href = "/email/sent";
+          })
+          .catch(() => {
+            window.location.href = "/error";
+          });
+      });
+    </script>
+  </body>
+</html>
